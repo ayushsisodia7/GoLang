@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option go_package = "test_mod/api";
+
+message CreateOrder {
+    string amount=1;
+    string currency=2;
+    string receipt=3;
+    string notes = 4;
+    string offer_id=5;
+}
+
+message OrderResponse {
+    string order_id = 1;
+    string entity = 2;
+    string amount = 3;
+    string status = 4;
+    string currency = 5;
+    string receipt = 6;
+    string offer_id=7;
+    string notes = 8;
+    int64 created_at = 9;   
+}
+
+message Error {
+  string code = 1;
+  string description = 2;
+  map<string, string> metadata = 3;
+  string reason = 4;
+  string source = 5;
+  string step = 6;
+}
+
+service OrderCreation {
+    rpc Create (CreateOrder) returns (OrderResponse);
+}
